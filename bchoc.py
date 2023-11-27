@@ -116,7 +116,7 @@ def get_environ():
     if path:
         return path
     else:
-        return "./bchoc"
+        return "./bchocfile"
 
 def get_evidence_ids():
     evidence_ids = []
@@ -390,41 +390,41 @@ def main():
     parser = argparse.ArgumentParser(description='Blockchain Chain of Custody Program', add_help=False)
 
     # Define the subparsers
-    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+    subparsers = parser.add_subparsers(dest='command')
 
-    add_parser = subparsers.add_parser('add', help='Add items to a case')
-    checkout_parser = subparsers.add_parser('checkout', help='Checkout items from a case')
-    checkin_parser = subparsers.add_parser('checkin', help='Checkin items to a case')
-    show_cases_parser = subparsers.add_parser('showcases', help='Show all cases')
-    show_items_parser = subparsers.add_parser('showitems', help='Show items in a case')
-    show_history_parser = subparsers.add_parser('showhistory', help='Show history of a case or item')
-    remove_parser = subparsers.add_parser('remove', help='Remove items from a case')
-    init_parser = subparsers.add_parser('init', help='Initialize the bchoc system')
-    verify_parser = subparsers.add_parser('verify', help='Verify the integrity of the bchoc system')
+    add_parser = subparsers.add_parser('add')
+    checkout_parser = subparsers.add_parser('checkout')
+    checkin_parser = subparsers.add_parser('checkin')
+    show_cases_parser = subparsers.add_parser('showcases')
+    show_items_parser = subparsers.add_parser('showitems')
+    show_history_parser = subparsers.add_parser('showhistory')
+    remove_parser = subparsers.add_parser('remove')
+    init_parser = subparsers.add_parser('init')
+    verify_parser = subparsers.add_parser('verify')
 
     # Define the arguments for each subparser
-    add_parser.add_argument('-c', '--case-id', help='The ID of the case to add items to', required=True)
-    add_parser.add_argument('-i', '--item-id', help='The ID of an item to add', action='append', required=True)
-    add_parser.add_argument('-h', '--handler', help='The handler who added the items', required=True)
-    add_parser.add_argument('-o', '--organization', help='The organization the items belong to', required=True)
+    add_parser.add_argument('-c', '--case-id', required=True)
+    add_parser.add_argument('-i', '--item-id', action='append', required=True)
+    add_parser.add_argument('-h', '--handler', required=True)
+    add_parser.add_argument('-o', '--organization', required=True)
 
     checkout_parser.add_argument('-i', '--item-id', help='The ID of the item to checkout', required=True)
     checkout_parser.add_argument('-h', '--handler', help='The handler who checked out the item', required=True)
     checkout_parser.add_argument('-o', '--organization', help='The organization the item belongs to', required=True)
 
-    checkin_parser.add_argument('-i', '--item-id', help='The ID of the item to checkin', required=True)
-    checkin_parser.add_argument('-h', '--handler', help='The handler who checked in the item', required=True)
-    checkin_parser.add_argument('-o', '--organization', help='The organization the item belongs to', required=True)
+    checkin_parser.add_argument('-i', '--item-id', required=True)
+    checkin_parser.add_argument('-h', '--handler', required=True)
+    checkin_parser.add_argument('-o', '--organization', required=True)
 
-    show_items_parser.add_argument('-c', '--case-id', help='The ID of the case to show items for', required=True)
+    show_items_parser.add_argument('-c', '--case-id', required=True)
 
-    show_history_parser.add_argument('-c', '--case-id', help='The ID of the case to show history for')
-    show_history_parser.add_argument('-i', '--item-id', help='The ID of the item to show history for')
-    show_history_parser.add_argument('-n', '--num-entries', help='The number of history entries to show')
+    show_history_parser.add_argument('-c', '--case-id')
+    show_history_parser.add_argument('-i', '--item-id')
+    show_history_parser.add_argument('-n', '--num-entries')
 
-    remove_parser.add_argument('-i', '--item-id', help='The ID of the item to remove', required=True)
-    remove_parser.add_argument('-y', '--reason', help='The reason for removing the item', required=True)
-    remove_parser.add_argument('-o', '--owner', help='The owner of the item')
+    remove_parser.add_argument('-i', '--item-id', required=True)
+    remove_parser.add_argument('-y', '--reason', required=True)
+    remove_parser.add_argument('-o', '--owner')
 
     # Parse the arguments
     args = parser.parse_args()
