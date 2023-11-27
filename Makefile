@@ -11,9 +11,8 @@ SOURCE = bhoc.py
 all: $(TARGET)
 
 $(TARGET): $(SOURCE)
-	$(PYTHON) -m py_compile bchoc.py
-	mv $(SOURCE)$(PYC_EXT) bchoc
-	chmod +x bchoc
+	$(PYTHON) -m pyinstaller --onefile $(SOURCE)
+	mv dist/$(SOURCE:py=) $(TARGET)
 
 clean:
-	$(RM) $(TARGET)
+	$(RM) -r dist $(TARGET) __pycache__ *.spec

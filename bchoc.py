@@ -1,3 +1,5 @@
+#!/usr/bin/env/python3
+
 import hashlib
 import struct
 import os
@@ -385,7 +387,7 @@ def verify():
         return 1
 
 def main():
-    parser = argparse.ArgumentParser(description='Blockchain Chain of Custody Program')
+    parser = argparse.ArgumentParser(description='Blockchain Chain of Custody Program', add_help=False)
 
     # Define the subparsers
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
@@ -403,15 +405,15 @@ def main():
     # Define the arguments for each subparser
     add_parser.add_argument('-c', '--case-id', help='The ID of the case to add items to', required=True)
     add_parser.add_argument('-i', '--item-id', help='The ID of an item to add', action='append', required=True)
-    add_parser.add_argument('-a', '--handler', help='The handler who added the items', required=True)
+    add_parser.add_argument('-h', '--handler', help='The handler who added the items', required=True)
     add_parser.add_argument('-o', '--organization', help='The organization the items belong to', required=True)
 
     checkout_parser.add_argument('-i', '--item-id', help='The ID of the item to checkout', required=True)
-    checkout_parser.add_argument('-a', '--handler', help='The handler who checked out the item', required=True)
+    checkout_parser.add_argument('-h', '--handler', help='The handler who checked out the item', required=True)
     checkout_parser.add_argument('-o', '--organization', help='The organization the item belongs to', required=True)
 
     checkin_parser.add_argument('-i', '--item-id', help='The ID of the item to checkin', required=True)
-    checkin_parser.add_argument('-a', '--handler', help='The handler who checked in the item', required=True)
+    checkin_parser.add_argument('-h', '--handler', help='The handler who checked in the item', required=True)
     checkin_parser.add_argument('-o', '--organization', help='The organization the item belongs to', required=True)
 
     show_items_parser.add_argument('-c', '--case-id', help='The ID of the case to show items for', required=True)
